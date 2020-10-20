@@ -1,86 +1,83 @@
-import React, { useEffect } from 'react'
+import React, { HTMLAttributes, useEffect } from 'react'
 import clsx from 'clsx'
-import { CarouselOptions, getOptions } from '../options'
+import { getOptions } from '../options'
 import useCarousel from '../use-carousel'
 import styles from './styles.module.css'
 
 type Props = {
+  initialSlide?: number
+  infinite?: boolean
+  orientation?: 'horizontal' | 'vertical'
+  slidesToScroll?: number
+  threshold?: number
+  visibeSlides?: number
+  className?: string
   children: React.ReactNode
-} & Partial<CarouselOptions>
+} & HTMLAttributes<HTMLDivElement>
 
-export default function Carousel({ children, ...props }: Props) {
+export default function Carousel({
+  infinite,
+  initialSlide,
+  orientation,
+  slidesToScroll,
+  threshold,
+  visibeSlides,
+  className,
+  children,
+  ...props
+}: Props) {
   const {
     options,
     setOptions,
-    offset,
-    setOffset,
-    isDragging,
-    setIsDragging,
+    trayRef,
     setTotalSlides,
-    trayStyles
+    trayStyles,
+    slideStyles,
+    handleMouseDown,
+    handleTouchStart,
+    handleBlur
   } = useCarousel()
 
-  const handleMouseDown = () => setIsDragging(true)
-  const handleTouchStart = () => setIsDragging(true)
-  const handleBlur = () => setIsDragging(false)
-  const handleTouchMove = (_ev: React.TouchEvent<HTMLDivElement>) => {}
-
   useEffect(() => {
-    setOptions(getOptions(props))
+    setOptions(
+      getOptions({
+        infinite,
+        initialSlide,
+        orientation,
+        slidesToScroll,
+        threshold,
+        visibeSlides
+      })
+    )
   }, [])
 
   useEffect(() => {
     setTotalSlides(React.Children.count(children))
   }, [children])
 
-  useEffect(() => {
-    const handleDragEnd = () => {
-      setIsDragging(false)
-      setOffset(0)
-    }
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState !== 'visible') {
-        setIsDragging(false)
-        setOffset(0)
-      }
-    }
-
-    const handleMouseMove = (ev: MouseEvent) => {
-      if (isDragging) {
-        setOffset(offset + ev.movementX)
-      }
-    }
-
-    document.addEventListener('mouseup', handleDragEnd)
-    document.addEventListener('touchcancel', handleDragEnd)
-    document.addEventListener('touchend', handleDragEnd)
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-    document.addEventListener('mousemove', handleMouseMove)
-
-    return () => {
-      document.removeEventListener('mouseup', handleDragEnd)
-      document.removeEventListener('touchcancel', handleDragEnd)
-      document.removeEventListener('touchend', handleDragEnd)
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-      document.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [isDragging, offset])
-
   return (
-    <div className={styles.container}>
+    <div {...props} className={clsx('carousel', styles.container, className)}>
       <div
+        ref={trayRef}
         className={clsx(
+          'carousel__tray',
           styles.tray,
-          styles[`tray--visible-slides-${options.visibeSlides}`]
+          styles[`tray--orientation-${options.orientation}`]
         )}
         style={trayStyles}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
         onBlur={handleBlur}
       >
-        {children}
+        {React.Children.toArray(children).map((child, index) => (
+          <div
+            key={(typeof child === 'object' && (child as any).key) || index}
+            className='carousel__slide'
+            style={slideStyles}
+          >
+            {child}
+          </div>
+        ))}
       </div>
     </div>
   )

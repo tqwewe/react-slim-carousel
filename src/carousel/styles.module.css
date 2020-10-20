@@ -1,46 +1,22 @@
 .container {
+  position: relative;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .tray {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   transition: transform 0.4s ease-in-out;
 }
 
-.tray--visible-slides-1 > * {
+.tray--orientation-horizontal {
+  flex-direction: row;
+  height: 100%;
+}
+.tray--orientation-vertical {
+  flex-direction: column;
   width: 100%;
-}
-.tray--visible-slides-2 > * {
-  width: 50%;
-}
-.tray--visible-slides-3 > * {
-  width: 33.3333 %;
-}
-.tray--visible-slides-4 > * {
-  width: 25%;
-}
-.tray--visible-slides-5 > * {
-  width: 20%;
-}
-.tray--visible-slides-6 > * {
-  width: 16.6666%;
-}
-.tray--visible-slides-7 > * {
-  width: 14.2857%;
-}
-.tray--visible-slides-8 > * {
-  width: 12.5%;
-}
-.tray--visible-slides-9 > * {
-  width: 11.1111%;
-}
-.tray--visible-slides-10 > * {
-  width: 10%;
-}
-.tray--visible-slides-11 > * {
-  width: 9.0909%;
-}
-.tray--visible-slides-12 > * {
-  width: 8.3333%;
 }
