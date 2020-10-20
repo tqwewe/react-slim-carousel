@@ -16,6 +16,8 @@ export interface CarouselContext {
   setIsDragging: React.Dispatch<React.SetStateAction<boolean>>
   totalSlides: number
   setTotalSlides: React.Dispatch<React.SetStateAction<number>>
+  disableAnimation: boolean
+  setDisableAnimation: React.Dispatch<React.SetStateAction<boolean>>
 
   // Calculated state
   traySize: number
@@ -33,9 +35,9 @@ export interface CarouselContext {
   last: () => void
 
   // Event handlers
-  handleMouseDown: () => void
-  handleTouchStart: () => void
+  handleDragStart: () => void
   handleBlur: () => void
+  handleTransitionEnd: () => void
 }
 
 export const context = createContext<CarouselContext>({} as CarouselContext)

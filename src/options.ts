@@ -1,6 +1,7 @@
 import defaults from 'lodash/fp/defaults'
 
 export interface CarouselOptions {
+  centerMode: boolean
   gap: number
   infinite: boolean
   initialSlide: number
@@ -15,6 +16,7 @@ export const getOptions = (
 ): CarouselOptions =>
   defaults(
     {
+      centerMode: false,
       gap: 0,
       infinite: false,
       initialSlide: 0,

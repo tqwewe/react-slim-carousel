@@ -13,20 +13,27 @@ const images = [
 const App = () => {
   const carousel = useCarousel()
 
-  // useEffect(() => {
-  //   console.log(carousel.options.infinite)
-  // }, [carousel])
-
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: 700,
+        margin: '32px auto',
+        backgroundColor: 'lightcoral'
+      }}
+    >
       <Carousel
-        visibeSlides={2}
+        centerMode
+        gap={12}
+        infinite
+        // orientation='vertical'
         slidesToScroll={1}
-        orientation='vertical'
-        style={{ width: 300, height: 100, display: 'inline-block' }}
+        visibeSlides={2}
+        style={{ width: '100%', height: 500, display: 'inline-block' }}
       >
         {images.map((image) => (
-          <div key={image}>
+          <div key={image} style={{ height: '100%' }}>
             <img
               style={{ width: '100%', height: '100%' }}
               draggable={false}
@@ -36,13 +43,18 @@ const App = () => {
           </div>
         ))}
       </Carousel>
-      <button disabled={carousel.previousDisabled} onClick={carousel.previous}>
-        Previous
-      </button>
-      <button disabled={carousel.nextDisabled} onClick={carousel.next}>
-        Next
-      </button>
-    </>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 12 }}>
+        <button
+          disabled={carousel.previousDisabled}
+          onClick={carousel.previous}
+        >
+          Previous
+        </button>
+        <button disabled={carousel.nextDisabled} onClick={carousel.next}>
+          Next
+        </button>
+      </div>
+    </div>
   )
 }
 
