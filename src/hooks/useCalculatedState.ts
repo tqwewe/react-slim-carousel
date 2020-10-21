@@ -9,6 +9,14 @@ export default function useCalculatedState({
 }) {
   const { options, totalSlides, currentSlide, disableAnimation } = useCarousel()
 
+  let dampenedOffset = offset
+  if (
+    (!options.infinite && currentSlide === 0 && dampenedOffset > 0) ||
+    (currentSlide === totalSlides - options.visibleSlides && offset < 0)
+  ) {
+    dampenedOffset *= options.edgeFriction
+  }
+
   const totalSlidesWithInfinite = options.infinite
     ? totalSlides + options.visibleSlides * 2 + 2
     : totalSlides
@@ -31,7 +39,7 @@ export default function useCalculatedState({
         ? `calc(${traySize}% + ${options.gap * totalSlides}px)`
         : undefined,
     transform: `translate${axis}(calc(${translation}% + ${
-      offset - options.gap / 2
+      dampenedOffset - options.gap / 2
     }px + ${
       options.centerMode
         ? (100 / totalSlidesWithInfinite / 2) * (options.visibleSlides - 1)

@@ -16,7 +16,7 @@ export default function useDragHandlersEffect({
   setIsDragging: Dispatch<SetStateAction<boolean>>
   setOffset: Dispatch<SetStateAction<number>>
 }) {
-  const { options, next, previous } = useCarousel()
+  const { currentSlide, options, next, previous } = useCarousel()
 
   useEffect(() => {
     const handleDragEnd = () => {
@@ -53,10 +53,10 @@ export default function useDragHandlersEffect({
     }
 
     document.addEventListener('mouseup', handleDragEnd, true)
-    document.addEventListener('touchcancel', handleDragEnd)
-    document.addEventListener('touchend', handleDragEnd)
+    document.addEventListener('touchcancel', handleDragEnd, true)
+    document.addEventListener('touchend', handleDragEnd, true)
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mousemove', handleMouseMove, true)
 
     return () => {
       document.removeEventListener('mouseup', handleDragEnd)
@@ -65,5 +65,14 @@ export default function useDragHandlersEffect({
       document.removeEventListener('visibilitychange', handleVisibilityChange)
       document.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [trayRef, isDragging, offset, options.orientation, options.threshold])
+  }, [
+    currentSlide,
+    trayRef,
+    isDragging,
+    offset,
+    options.orientation,
+    options.threshold,
+    options.infinite,
+    options.edgeFriction
+  ])
 }

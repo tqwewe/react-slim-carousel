@@ -19,6 +19,7 @@ export type CarouselProps = {
   centerMode?: CarouselOptions['centerMode']
   draggable?: CarouselOptions['draggable']
   easing?: CarouselOptions['easing']
+  edgeFriction?: CarouselOptions['edgeFriction']
   gap?: CarouselOptions['gap']
   infinite?: CarouselOptions['infinite']
   initialSlide?: CarouselOptions['initialSlide']
@@ -44,6 +45,7 @@ export default function Carousel({
   centerMode,
   draggable,
   easing,
+  edgeFriction,
   gap,
   infinite,
   initialSlide,
@@ -92,6 +94,7 @@ export default function Carousel({
     centerMode,
     draggable,
     easing,
+    edgeFriction,
     gap,
     infinite,
     initialSlide,
@@ -135,7 +138,7 @@ export default function Carousel({
     >
       <div
         ref={trayRef}
-        className={clsx('carousel__tray')}
+        className='carousel__tray'
         style={trayStyles}
         onMouseDown={handleDragStart}
         onTouchStart={handleDragStart}

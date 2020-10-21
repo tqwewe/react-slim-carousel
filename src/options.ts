@@ -11,6 +11,8 @@ export interface CarouselOptions {
   draggable: boolean
   // CSS easing
   easing: string
+  // Resistance when swiping edges of non-infinite carousels
+  edgeFriction: number
   // Gap in pixels between each slide
   gap: number
   // Intinite loop sliding
@@ -43,6 +45,7 @@ export const getOptions = (
       centerMode: false,
       draggable: true,
       easing: 'ease-in-out',
+      edgeFriction: 0.3,
       gap: 0,
       infinite: false,
       initialSlide: 0,
