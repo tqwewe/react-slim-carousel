@@ -15,20 +15,22 @@ npm install --save react-slim-carousel
 ```tsx
 import React from 'react'
 
-import { Carousel, withCarousel } from 'react-slim-carousel'
+import { Carousel, CarouselProvider, PreviousButton, NextButton } from 'react-slim-carousel'
 import 'react-slim-carousel/dist/index.css'
 
-function Example() {
+export default function Example() {
   return (
-    <Carousel style={{ height: 400 }}>
-      <div>Slide 1</div>
-      <div>Slide 2</div>
-      <div>Slide 3</div>
-    </Carousel>
+    <CarouselProvider>
+      <Carousel style={{ height: 400 }}>
+        <div>Slide 1</div>
+        <div>Slide 2</div>
+        <div>Slide 3</div>
+      </Carousel>
+      <PreviousButton>Previous</PreviousButton>
+      <NextButton>Next</NextButton>
+    </CarouselProvider>
   )
 }
-
-export default withCarousel()(Example)
 ```
 
 Ensure you wrap your component with `tsxwithCarousel(opts)(Component)` to give the context to the Carousel.

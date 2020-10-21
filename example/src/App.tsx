@@ -28,9 +28,9 @@ const App = () => {
     >
       <Carousel
         autoSize
-        centerMode
+        // centerMode
         gap={10}
-        infinite
+        // infinite
         // orientation='vertical'
         playDirection='reverse'
         slidesToScroll={1}

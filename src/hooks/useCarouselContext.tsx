@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
-import { CarouselOptions } from './options'
-import { CarouselContext } from './context'
+import { CarouselOptions } from '../options'
+import { CarouselContext } from '../context'
 
 export default function useCarouselContext(
   opts: CarouselOptions
@@ -44,14 +44,29 @@ export default function useCarouselContext(
   const goTo = useCallback(
     (slide: number) => {
       if (isSliding) {
-        return
+        return currentSlide
       }
 
+      const nextSlide = Math.min(maxSlide, Math.max(minSlide, slide))
+
       setIsSliding(true)
-      setCurrentSlide(Math.min(maxSlide, Math.max(minSlide, slide)))
+      setCurrentSlide(nextSlide)
       checkInfinitePosition()
+
+      setTimeout(() => {
+        setIsSliding(false)
+      }, options.slideSpeed)
+
+      return nextSlide
     },
-    [isSliding, minSlide, maxSlide, checkInfinitePosition]
+    [
+      currentSlide,
+      isSliding,
+      minSlide,
+      maxSlide,
+      checkInfinitePosition,
+      options.slideSpeed
+    ]
   )
   const next = useCallback(() => goTo(currentSlide + options.slidesToScroll), [
     goTo,
