@@ -1,3 +1,4 @@
+import './carousel/styles.css'
 import Carousel from './carousel'
 export { default as useCarousel } from './use-carousel'
 export * from './context'

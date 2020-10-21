@@ -1,10 +1,10 @@
-.container {
+.carousel {
   position: relative;
   max-width: 100%;
   overflow: hidden;
 }
 
-.tray {
+.carousel__tray {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,11 +12,11 @@
   transition: transform 0.4s ease-in-out;
 }
 
-.tray--orientation-horizontal {
+.carousel--horizontal .carousel__tray {
   flex-direction: row;
   height: 100%;
 }
-.tray--orientation-vertical {
+.carousel--vertical .carousel__tray {
   flex-direction: column;
   width: 100%;
 }

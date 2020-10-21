@@ -2,7 +2,6 @@ import React, { HTMLAttributes, useEffect } from 'react'
 import clsx from 'clsx'
 import { getOptions } from '../options'
 import useCarousel from '../use-carousel'
-import styles from './styles.module.css'
 
 type Props = {
   centerMode?: boolean
@@ -69,7 +68,7 @@ export default function Carousel({
   const slides = React.Children.toArray(children) as React.ReactElement[]
 
   const infiniteBefore = options.infinite
-    ? new Array(options.visibeSlides)
+    ? new Array(options.visibeSlides + 1)
         .fill(null)
         .map((_, index) => (
           <div
@@ -82,14 +81,16 @@ export default function Carousel({
             )}
             style={slideStyles}
           >
-            {React.cloneElement(slides[slides.length - 1 - index])}
+            {React.cloneElement(
+              slides[Math.abs((slides.length - 1 - index) % slides.length)]
+            )}
           </div>
         ))
         .reverse()
     : null
 
   const infiniteAfter = options.infinite
-    ? new Array(options.visibeSlides).fill(null).map((_, index) => (
+    ? new Array(options.visibeSlides + 1).fill(null).map((_, index) => (
         <div
           key={`infinite-after-${index}`}
           className={clsx(
@@ -98,20 +99,24 @@ export default function Carousel({
           )}
           style={slideStyles}
         >
-          {React.cloneElement(slides[index])}
+          {React.cloneElement(slides[Math.abs(index) % slides.length])}
         </div>
       ))
     : null
 
   return (
-    <div {...props} className={clsx('carousel', styles.container, className)}>
+    <div
+      {...props}
+      className={clsx(
+        'carousel',
+        `carousel--${options.orientation}`,
+        options.centerMode && `carousel--center-mode`,
+        className
+      )}
+    >
       <div
         ref={trayRef}
-        className={clsx(
-          'carousel__tray',
-          styles.tray,
-          styles[`tray--orientation-${options.orientation}`]
-        )}
+        className={clsx('carousel__tray')}
         style={trayStyles}
         onMouseDown={handleDragStart}
         onTouchStart={handleDragStart}

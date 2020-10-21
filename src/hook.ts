@@ -19,20 +19,27 @@ export default function useCarouselContext(
 
   // Calculated state
   const totalSlidesWithInfinite = options.infinite
-    ? totalSlides + options.visibeSlides * 2
+    ? totalSlides + options.visibeSlides * 2 + 2
     : totalSlides
   const traySize = (totalSlidesWithInfinite / options.visibeSlides) * 100
   const translation =
     (100 / totalSlidesWithInfinite) *
-    (currentSlide + (options.infinite ? options.visibeSlides : 0)) *
+    (currentSlide + (options.infinite ? options.visibeSlides + 1 : 0)) *
     -1
   const axis = options.orientation === 'vertical' ? 'Y' : 'X'
 
+  console.log(totalSlidesWithInfinite)
+
   const trayStyles = {
+    // margin: options.infinite
+    //   ? undefined
+    //   : `${options.orientation === 'vertical' ? options.gap * 2 * -1 : 0}px ${
+    //       options.orientation === 'horizontal' ? options.gap * 4 * -1 : 0
+    //     }px`,
     width:
       options.orientation === 'horizontal'
         ? `calc(${traySize}% + ${
-            options.gap * totalSlides - (options.infinite ? 0 : options.gap * 2)
+            (options.gap * totalSlidesWithInfinite) / 2
           }px)`
         : undefined,
     height:
@@ -45,7 +52,11 @@ export default function useCarouselContext(
       options.centerMode
         ? (100 / totalSlidesWithInfinite / 2) * (options.visibeSlides - 1)
         : 0
-    }%))`,
+    }% + ${
+      options.orientation === 'vertical' && options.centerMode
+        ? (options.gap / totalSlidesWithInfinite) * 2
+        : 0
+    }px))`,
     transition:
       isDragging || totalSlides === 0 || disableAnimation ? 'none' : undefined
   }
