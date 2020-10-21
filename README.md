@@ -1,6 +1,6 @@
 # react-slim-carousel
 
-> Minimal react carousel made using hooks.
+Minimal react carousel made using hooks.
 
 [![NPM](https://img.shields.io/npm/v/react-slim-carousel.svg)](https://www.npmjs.com/package/react-slim-carousel) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -35,22 +35,22 @@ Ensure you wrap your component with `tsxwithCarousel(opts)(Component)` to give t
 
 ## Options
 
-| Setting        | Type                         | Description                                | Default         |
-| -------------- | ---------------------------- | ------------------------------------------ | --------------- |
-| autoPlay       | `boolean`                   | Autoplay through slides                    | `false`         |
-| centerMode     | `boolean`                   | Show active slide in the center            | `false`         |
-| draggable      | `boolean`                   | Enable/disable drag to slide               | `true`          |
-| easing         | `string`                    | CSS easing                                 | `'ease-in-out'` |
-| gap            | `number`                    | Gap in pixels between each slide           | `0`             |
-| infinite       | `boolean`                   | Intinite loop sliding                      | `false`         |
-| initialSlide   | `number`                    | Initial slide to display                   | `0`             |
-| interval       | `number`                    | Time in ms between autoplay sliding        | `3000`          |
-| orientation    | `'horizontal' | 'vertical'` | Slider orientation                         | `'horizontal'`  |
-| playDirection  | `'normal' | 'reverse'`      | Autoplay direction                         | `'normal'`      |
-| slidesToScroll | `number`                    | Number of slides to scroll                 | `1`             |
-| slideSpeed     | `number`                    | Transition speed in ms                     | `400`           |
-| threshold      | `number`                    | Drag threshold for scrolling to next slide | `0.2`           |
-| visibeSlides   | `number`                    | Number of slides visible                   | `1`             |
+| Setting        | Type          | Description                                | Default            |
+| -------------- | ------------- | ------------------------------------------ | ------------------ |
+| autoPlay       | `boolean`     | Autoplay through slides                    | `false`            |
+| centerMode     | `boolean`     | Show active slide in the center            | `false`            |
+| draggable      | `boolean`     | Enable/disable drag to slide               | `true`             |
+| easing         | `string`      | CSS easing                                 | `'ease-in-out'`    |
+| gap            | `number`      | Gap in pixels between each slide           | `0`                |
+| infinite       | `boolean`     | Intinite loop sliding                      | `false`            |
+| initialSlide   | `number`      | Initial slide to display                   | `0`                |
+| interval       | `number`      | Time in ms between autoplay sliding        | `3000`             |
+| orientation    | `'horizontal' | 'vertical'`                                | Slider orientation | `'horizontal'` |
+| playDirection  | `'normal'     | 'reverse'`                                 | Autoplay direction | `'normal'` |
+| slidesToScroll | `number`      | Number of slides to scroll                 | `1`                |
+| slideSpeed     | `number`      | Transition speed in ms                     | `400`              |
+| threshold      | `number`      | Drag threshold for scrolling to next slide | `0.2`              |
+| visibeSlides   | `number`      | Number of slides visible                   | `1`                |
 
 ## Responsive
 
@@ -58,7 +58,7 @@ The Carousel component accepts an additional prop `responsive` which is an objec
 
 Example:
 
-```tsx
+```jsx
 <Carousel
   visibleSlides={2}
   responsive={{
