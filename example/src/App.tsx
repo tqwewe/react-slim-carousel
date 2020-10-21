@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Carousel, { useCarousel, withCarousel } from 'react-carousel'
 import 'react-carousel/dist/index.css'
@@ -12,6 +12,9 @@ const images = [
 
 const App = () => {
   const carousel = useCarousel()
+  const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>(
+    'horizontal'
+  )
 
   return (
     <div
@@ -27,9 +30,15 @@ const App = () => {
         centerMode
         gap={10}
         infinite
-        orientation='vertical'
+        // orientation='vertical'
+        playDirection='reverse'
         slidesToScroll={1}
         visibeSlides={2}
+        responsive={{
+          800: {
+            orientation
+          }
+        }}
         style={{ width: '100%', height: 550, display: 'inline-block' }}
       >
         {images.map((image) => (
@@ -54,6 +63,20 @@ const App = () => {
           Next
         </button>
       </div>
+      <div>
+        <h4>
+          {carousel.currentSlide} {orientation}
+        </h4>
+      </div>
+      <button
+        onClick={() =>
+          setOrientation((lastOrientation) =>
+            lastOrientation === 'vertical' ? 'horizontal' : 'vertical'
+          )
+        }
+      >
+        Toggle orientation
+      </button>
     </div>
   )
 }

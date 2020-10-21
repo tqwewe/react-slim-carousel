@@ -1,30 +1,48 @@
 import React, { HTMLAttributes, useEffect } from 'react'
 import clsx from 'clsx'
-import { getOptions } from '../options'
+import hash from 'object-hash'
+import { useMediaQueries } from '@react-hook/media-query'
+import { getOptions, CarouselOptions } from '../options'
 import useCarousel from '../use-carousel'
 
+type CarouselProps = {
+  autoPlay?: CarouselOptions['autoPlay']
+  centerMode?: CarouselOptions['centerMode']
+  draggable?: CarouselOptions['draggable']
+  easing?: CarouselOptions['easing']
+  gap?: CarouselOptions['gap']
+  initialSlide?: CarouselOptions['initialSlide']
+  infinite?: CarouselOptions['infinite']
+  orientation?: CarouselOptions['orientation']
+  playDirection?: CarouselOptions['playDirection']
+  slidesToScroll?: CarouselOptions['slidesToScroll']
+  slideSpeed?: CarouselOptions['slideSpeed']
+  threshold?: CarouselOptions['threshold']
+  visibeSlides?: CarouselOptions['visibeSlides']
+}
+
 type Props = {
-  centerMode?: boolean
-  gap?: number
-  initialSlide?: number
-  infinite?: boolean
-  orientation?: 'horizontal' | 'vertical'
-  slidesToScroll?: number
-  threshold?: number
-  visibeSlides?: number
+  responsive?: Record<number, CarouselProps>
   className?: string
   children: React.ReactNode
-} & HTMLAttributes<HTMLDivElement>
+} & CarouselProps &
+  HTMLAttributes<HTMLDivElement>
 
 export default function Carousel({
+  autoPlay,
   centerMode,
+  draggable,
+  easing,
   gap,
   infinite,
   initialSlide,
   orientation,
+  playDirection,
   slidesToScroll,
+  slideSpeed,
   threshold,
   visibeSlides,
+  responsive,
   className,
   children,
   ...props
@@ -42,21 +60,50 @@ export default function Carousel({
     handleBlur,
     handleTransitionEnd
   } = useCarousel()
+  const { matches } = useMediaQueries(
+    Object.keys(responsive || {}).reduce(
+      (acc, key) => ({ ...acc, [key]: `(min-width: ${key}px)` }),
+      {}
+    )
+  )
 
   useEffect(() => {
-    setOptions(
-      getOptions({
-        centerMode,
-        gap,
-        infinite,
-        initialSlide,
-        orientation,
-        slidesToScroll,
-        threshold,
-        visibeSlides
+    const options = Object.entries(responsive || {})
+      .filter(([screen]) => matches[screen])
+      .sort(([a], [b]) => {
+        if (a < b) {
+          return -1
+        }
+        if (a > b) {
+          return 1
+        }
+        return 0
       })
-    )
-  }, [])
+      .reduce(
+        (acc, [, opts]) => ({ ...acc, ...opts }),
+        getOptions({
+          autoPlay,
+          centerMode,
+          draggable,
+          easing,
+          gap,
+          infinite,
+          initialSlide,
+          orientation,
+          playDirection,
+          slidesToScroll,
+          slideSpeed,
+          threshold,
+          visibeSlides
+        })
+      )
+
+    setDisableAnimation(true)
+    setOptions(options)
+    setTimeout(() => {
+      setDisableAnimation(false)
+    })
+  }, [matches, hash(responsive)])
 
   useEffect(() => {
     setTotalSlides(React.Children.count(children))

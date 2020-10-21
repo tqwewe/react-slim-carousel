@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   display: flex;
-  transition: transform 0.4s ease-in-out;
+  transition-property: transform;
 }
 
 .carousel--horizontal .carousel__tray {

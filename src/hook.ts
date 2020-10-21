@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { CarouselOptions } from './options'
 import { CarouselContext } from './context'
 
@@ -28,8 +28,6 @@ export default function useCarouselContext(
     -1
   const axis = options.orientation === 'vertical' ? 'Y' : 'X'
 
-  console.log(totalSlidesWithInfinite)
-
   const trayStyles = {
     // margin: options.infinite
     //   ? undefined
@@ -57,8 +55,10 @@ export default function useCarouselContext(
         ? (options.gap / totalSlidesWithInfinite) * 2
         : 0
     }px))`,
-    transition:
-      isDragging || totalSlides === 0 || disableAnimation ? 'none' : undefined
+    transitionProperty:
+      isDragging || totalSlides === 0 || disableAnimation ? 'none' : undefined,
+    transitionDuration: `${options.slideSpeed}ms`,
+    transitionTimingFunction: options.easing
   }
 
   const slideStyles = {
@@ -78,8 +78,7 @@ export default function useCarouselContext(
   }
 
   const firstSlide = 0
-  const lastSlide =
-    totalSlides - options.visibeSlides + (options.centerMode ? 1 : 0)
+  const lastSlide = totalSlides - options.visibeSlides
   const minSlide = options.infinite ? -Infinity : firstSlide
   const maxSlide = options.infinite ? Infinity : lastSlide
 
@@ -105,23 +104,37 @@ export default function useCarouselContext(
     }
   }
 
-  const goTo = (slide: number) => {
-    if (isSliding) {
-      return
-    }
+  const goTo = useCallback(
+    (slide: number) => {
+      if (isSliding) {
+        return
+      }
 
-    setIsSliding(true)
-    setCurrentSlide(Math.min(maxSlide, Math.max(minSlide, slide)))
-    checkInfinitePosition()
-  }
+      setIsSliding(true)
+      setCurrentSlide(Math.min(maxSlide, Math.max(minSlide, slide)))
+      checkInfinitePosition()
+    },
+    [isSliding, minSlide, maxSlide, checkInfinitePosition]
+  )
 
-  const next = () => goTo(currentSlide + options.slidesToScroll)
-  const previous = () => goTo(currentSlide - options.slidesToScroll)
-  const first = () => goTo(firstSlide)
-  const last = () => goTo(lastSlide)
+  const next = useCallback(() => goTo(currentSlide + options.slidesToScroll), [
+    goTo,
+    currentSlide,
+    options
+  ])
+  const previous = useCallback(
+    () => goTo(currentSlide - options.slidesToScroll),
+    [goTo, currentSlide, options]
+  )
+  const first = useCallback(() => goTo(firstSlide), [goTo, firstSlide])
+  const last = useCallback(() => goTo(lastSlide), [goTo, lastSlide])
 
   // Event handlers
   const handleDragStart = () => {
+    if (!options.draggable) {
+      return
+    }
+
     setIsDragging(true)
     checkInfinitePosition()
   }
@@ -132,6 +145,19 @@ export default function useCarouselContext(
   }
 
   // Effects
+  // Autoplay
+  useEffect(() => {
+    if (isDragging || !options.autoPlay) {
+      return
+    }
+
+    const interval =
+      options.playDirection === 'reverse'
+        ? setInterval(previous, options.interval)
+        : setInterval(next, options.interval)
+    return () => clearInterval(interval)
+  }, [options, isDragging, next, previous])
+
   useEffect(() => {
     const handleDragEnd = () => {
       const slideSizePx = trayRef.current
