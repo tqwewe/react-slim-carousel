@@ -1,6 +1,6 @@
 # react-slim-carousel
 
-Minimal but feature-full react carousel made using hooks.
+Minimal but feature-rich react carousel made using hooks.
 
 [![NPM](https://img.shields.io/npm/v/react-slim-carousel.svg)](https://www.npmjs.com/package/react-slim-carousel) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -20,6 +20,7 @@ import React from 'react'
 import {
   Carousel,
   CarouselProvider,
+  Dots,
   PreviousButton,
   NextButton
 } from 'react-slim-carousel'

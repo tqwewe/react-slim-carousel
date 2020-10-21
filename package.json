@@ -1,7 +1,7 @@
 {
   "name": "react-slim-carousel",
-  "version": "1.0.18",
-  "description": "Minimal but feature-full react carousel made using hooks.",
+  "version": "1.0.19",
+  "description": "Minimal but feature-rich react carousel made using hooks.",
   "author": "Ari Seyhun <ariseyhun@live.com.au>",
   "license": "MIT",
   "homepage": "https://github.com/Acidic9/react-slim-carousel#readme",
