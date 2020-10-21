@@ -1,4 +1,4 @@
-import React, { createContext, RefObject } from 'react'
+import React, { createContext } from 'react'
 import useCarouselContext from './hook'
 import { CarouselOptions, getOptions } from './options'
 
@@ -8,24 +8,15 @@ export interface CarouselContext {
   setOptions: React.Dispatch<React.SetStateAction<CarouselOptions>>
 
   // State
-  trayRef: RefObject<HTMLDivElement>
   currentSlide: number
-  offset: number
-  setOffset: React.Dispatch<React.SetStateAction<number>>
-  isDragging: boolean
-  setIsDragging: React.Dispatch<React.SetStateAction<boolean>>
   totalSlides: number
-  setTotalSlides: React.Dispatch<React.SetStateAction<number>>
   disableAnimation: boolean
+  isSliding: boolean
+  setTotalSlides: React.Dispatch<React.SetStateAction<number>>
   setDisableAnimation: React.Dispatch<React.SetStateAction<boolean>>
-  containerWidth: number | undefined
-  containerHeight: number | undefined
+  setIsSliding: React.Dispatch<React.SetStateAction<boolean>>
 
   // Calculated state
-  traySize: number
-  translation: number
-  trayStyles: React.CSSProperties
-  slideStyles: React.CSSProperties
   nextDisabled: boolean
   previousDisabled: boolean
 
@@ -35,11 +26,7 @@ export interface CarouselContext {
   previous: () => void
   first: () => void
   last: () => void
-
-  // Event handlers
-  handleDragStart: () => void
-  handleBlur: () => void
-  handleTransitionEnd: () => void
+  checkInfinitePosition: () => void
 }
 
 export const context = createContext<CarouselContext>({} as CarouselContext)
