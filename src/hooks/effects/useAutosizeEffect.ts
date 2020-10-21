@@ -1,5 +1,5 @@
 import { Dispatch, RefObject, SetStateAction, useEffect } from 'react'
-import debounce from 'lodash/fp/debounce'
+import debounce from 'lodash.debounce'
 import useCarousel from '../useCarousel'
 
 export default function useAutosizeEffect({
@@ -49,7 +49,7 @@ export default function useAutosizeEffect({
     }
 
     adjustHeight()
-    const debounced = debounce(100, adjustHeight)
+    const debounced = debounce(adjustHeight, 100)
 
     window.addEventListener('resize', debounced)
     return () => window.removeEventListener('resize', debounced)

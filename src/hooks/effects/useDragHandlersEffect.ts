@@ -56,7 +56,7 @@ export default function useDragHandlersEffect({
     document.addEventListener('touchcancel', handleDragEnd, true)
     document.addEventListener('touchend', handleDragEnd, true)
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    document.addEventListener('mousemove', handleMouseMove, true)
+    document.addEventListener('mousemove', handleMouseMove)
 
     return () => {
       document.removeEventListener('mouseup', handleDragEnd)

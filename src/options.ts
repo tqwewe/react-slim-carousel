@@ -1,4 +1,4 @@
-import defaults from 'lodash/fp/defaults'
+import defaults from 'lodash.defaults'
 
 export interface CarouselOptions {
   // Autoplay through slides

@@ -1,6 +1,6 @@
 {
   "name": "react-slim-carousel",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "description": "Minimal but feature-full react carousel made using hooks.",
   "author": "Ari Seyhun <ariseyhun@live.com.au>",
   "license": "MIT",
@@ -42,9 +42,9 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.8",
     "@types/jest": "^26.0.14",
-    "@types/lodash": "^4.14.162",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.defaults": "^4.2.6",
     "@types/node": "^14.11.10",
-    "@types/object-hash": "^1.3.4",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
@@ -75,7 +75,7 @@
   "dependencies": {
     "@react-hook/media-query": "^1.1.1",
     "clsx": "^1.1.1",
-    "lodash": "^4.17.20",
-    "object-hash": "^2.0.3"
+    "lodash.debounce": "^4.0.8",
+    "lodash.defaults": "^4.2.0"
   }
 }

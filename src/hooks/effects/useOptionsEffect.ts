@@ -1,9 +1,38 @@
 import { useEffect } from 'react'
 import { Matches } from '@react-hook/media-query'
-import hash from 'object-hash'
 import { CarouselProps } from '../../components/carousel/Carousel'
 import { getOptions } from '../../options'
 import useCarousel from '../useCarousel'
+
+function responsiveToStr(
+  responsive: Record<string | number, CarouselProps> | undefined
+) {
+  if (!responsive) {
+    return ''
+  }
+
+  // Sort
+  const sorted = Object.entries(responsive).sort(
+    ([a], [b]) => parseInt(a, 10) - parseInt(b, 10)
+  )
+
+  return sorted.reduce((str, [screen, optGroup]) => {
+    const sortedOptions = Object.entries(optGroup).sort(([a], [b]) => {
+      if (a < b) {
+        return -1
+      }
+      if (a > b) {
+        return 1
+      }
+      return 0
+    })
+    const optStr = `${screen}::${sortedOptions.reduce(
+      (str, [k, v]) => `${str}~${k}${v}`,
+      ''
+    )}`
+    return `${str}|${optStr}`
+  }, '')
+}
 
 export default function useOptionsEffect({
   autoPlay,
@@ -30,6 +59,7 @@ export default function useOptionsEffect({
   const { setDisableAnimation, setOptions } = useCarousel()
 
   useEffect(() => {
+    console.log('rerender')
     const options = Object.entries(responsive || {})
       .filter(([screen]) => matches[screen])
       .sort(([a], [b]) => parseInt(a, 10) - parseInt(b, 10))
@@ -59,5 +89,5 @@ export default function useOptionsEffect({
     setTimeout(() => {
       setDisableAnimation(false)
     })
-  }, [matches, responsive ? hash(responsive) : 0])
+  }, [matches, responsiveToStr(responsive)])
 }
