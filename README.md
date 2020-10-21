@@ -37,20 +37,20 @@ Ensure you wrap your component with `tsxwithCarousel(opts)(Component)` to give t
 
 | Setting        | Type                         | Description                                | Default         |
 | -------------- | ---------------------------- | ------------------------------------------ | --------------- |
-| autoPlay       | `boolean`                    | Autoplay through slides                    | `false`         |
-| centerMode     | `boolean`                    | Show active slide in the center            | `false`         |
-| draggable      | `boolean`                    | Enable/disable drag to slide               | `true`          |
-| easing         | `string`                     | CSS easing                                 | `'ease-in-out'` |
-| gap            | `number`                     | Gap in pixels between each slide           | `0`             |
-| infinite       | `boolean`                    | Intinite loop sliding                      | `false`         |
-| initialSlide   | `number`                     | Initial slide to display                   | `0`             |
-| interval       | `number`                     | Time in ms between autoplay sliding        | `3000`          |
-| orientation    | `'horizontal' \| 'vertical'` | Slider orientation                         | `'horizontal'`  |
-| playDirection  | `'normal' \| 'reverse'`      | Autoplay direction                         | `'normal'`      |
-| slidesToScroll | `number`                     | Number of slides to scroll                 | `1`             |
-| slideSpeed     | `number`                     | Transition speed in ms                     | `400`           |
-| threshold      | `number`                     | Drag threshold for scrolling to next slide | `0.2`           |
-| visibeSlides   | `number`                     | Number of slides visible                   | `1`             |
+| autoPlay       | `boolean`                   | Autoplay through slides                    | `false`         |
+| centerMode     | `boolean`                   | Show active slide in the center            | `false`         |
+| draggable      | `boolean`                   | Enable/disable drag to slide               | `true`          |
+| easing         | `string`                    | CSS easing                                 | `'ease-in-out'` |
+| gap            | `number`                    | Gap in pixels between each slide           | `0`             |
+| infinite       | `boolean`                   | Intinite loop sliding                      | `false`         |
+| initialSlide   | `number`                    | Initial slide to display                   | `0`             |
+| interval       | `number`                    | Time in ms between autoplay sliding        | `3000`          |
+| orientation    | `'horizontal' | 'vertical'` | Slider orientation                         | `'horizontal'`  |
+| playDirection  | `'normal' | 'reverse'`      | Autoplay direction                         | `'normal'`      |
+| slidesToScroll | `number`                    | Number of slides to scroll                 | `1`             |
+| slideSpeed     | `number`                    | Transition speed in ms                     | `400`           |
+| threshold      | `number`                    | Drag threshold for scrolling to next slide | `0.2`           |
+| visibeSlides   | `number`                    | Number of slides visible                   | `1`             |
 
 ## Responsive
 
