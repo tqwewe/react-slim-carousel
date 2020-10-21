@@ -1,4 +1,4 @@
-import React, { createContext, Ref } from 'react'
+import React, { createContext, RefObject } from 'react'
 import useCarouselContext from './hook'
 import { CarouselOptions, getOptions } from './options'
 
@@ -8,7 +8,7 @@ export interface CarouselContext {
   setOptions: React.Dispatch<React.SetStateAction<CarouselOptions>>
 
   // State
-  trayRef: Ref<HTMLDivElement>
+  trayRef: RefObject<HTMLDivElement>
   currentSlide: number
   offset: number
   setOffset: React.Dispatch<React.SetStateAction<number>>
@@ -18,6 +18,8 @@ export interface CarouselContext {
   setTotalSlides: React.Dispatch<React.SetStateAction<number>>
   disableAnimation: boolean
   setDisableAnimation: React.Dispatch<React.SetStateAction<boolean>>
+  containerWidth: number | undefined
+  containerHeight: number | undefined
 
   // Calculated state
   traySize: number
@@ -42,7 +44,7 @@ export interface CarouselContext {
 
 export const context = createContext<CarouselContext>({} as CarouselContext)
 
-export const ContextProvider = context.Provider
+export const CarouselProvider = context.Provider
 
 export function withCarousel(options: Partial<CarouselOptions> = {}) {
   const optsWithDefaults = getOptions(options)
@@ -54,9 +56,9 @@ export function withCarousel(options: Partial<CarouselOptions> = {}) {
     const value = useCarouselContext(optsWithDefaults)
 
     return (
-      <ContextProvider value={value}>
+      <CarouselProvider value={value}>
         <Component {...props}>{children}</Component>
-      </ContextProvider>
+      </CarouselProvider>
     )
   }
 }

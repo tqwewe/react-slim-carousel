@@ -3,6 +3,8 @@ import defaults from 'lodash/fp/defaults'
 export interface CarouselOptions {
   // Autoplay through slides
   autoPlay: boolean
+  // Set the height (or width) to the largest slide depending on the orientation
+  autoSize: boolean
   // Show active slide in the center
   centerMode: boolean
   // Enable/disable drag to slide
@@ -28,7 +30,7 @@ export interface CarouselOptions {
   // Drag threshold for scrolling to next slide
   threshold: number
   // Number of slides visible
-  visibeSlides: number
+  visibleSlides: number
 }
 
 export const getOptions = (
@@ -37,6 +39,7 @@ export const getOptions = (
   defaults(
     {
       autoPlay: false,
+      autoSize: true,
       centerMode: false,
       draggable: true,
       easing: 'ease-in-out',
@@ -49,7 +52,7 @@ export const getOptions = (
       slidesToScroll: 1,
       slideSpeed: 400,
       threshold: 0.2,
-      visibeSlides: 1
+      visibleSlides: 1
     },
     opts
   )
