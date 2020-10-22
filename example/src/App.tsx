@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Carousel, useCarousel, withCarousel } from 'react-carousel'
+import { Carousel, Dots, useCarousel, withCarousel } from 'react-carousel'
 import 'react-carousel/dist/index.css'
 
 const images = [
@@ -30,10 +30,10 @@ const App = () => {
         autoSize
         // centerMode
         gap={10}
-        // infinite
+        infinite
         // orientation='vertical'
         playDirection='reverse'
-        slidesToScroll={1}
+        slidesToScroll={2}
         visibleSlides={2}
         responsive={{
           800: {
@@ -78,6 +78,7 @@ const App = () => {
       >
         Toggle orientation
       </button>
+      <Dots dot={() => <div />} />
     </div>
   )
 }

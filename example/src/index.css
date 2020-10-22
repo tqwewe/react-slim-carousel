@@ -12,3 +12,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.carousel-dot {
+  background-color: rgb(200, 200, 200);
+}
+
+.carousel-dot--active {
+  background-color: #000;
+}

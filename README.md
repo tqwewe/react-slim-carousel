@@ -12,6 +12,10 @@ Minimal but feature-rich react carousel made using hooks.
 npm install --save react-slim-carousel
 ```
 
+## Demo
+
+[![Edit React Slim Carousel Example](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-slim-carousel-example-yog2j?fontsize=14&hidenavigation=1&theme=dark&view=preview)
+
 ## Usage
 
 ```tsx
@@ -66,24 +70,24 @@ export default withCarousel()(Example)
 
 ## Options
 
-| Setting        | Type                        | Description                                                                 | Default         |
-| -------------- | --------------------------- | --------------------------------------------------------------------------- | --------------- |
-| autoPlay       | `boolean`                   | Autoplay through slides                                                     | `false`         |
-| autoSize       | `boolean`                   | Set the height (or width) to the largest slide depending on the orientation | `true`          |
-| centerMode     | `boolean`                   | Show active slide in the center                                             | `false`         |
-| draggable      | `boolean`                   | Enable/disable drag to slide                                                | `true`          |
-| easing         | `string`                    | CSS easing                                                                  | `'ease-in-out'` |
-| edgeFriction   | `number`                    | Resistance when swiping edges of non-infinite carousels                     | `0.3`           |
-| gap            | `number`                    | Gap in pixels between each slide                                            | `0`             |
-| infinite       | `boolean`                   | Intinite loop sliding                                                       | `false`         |
-| initialSlide   | `number`                    | Initial slide to display                                                    | `0`             |
-| interval       | `number`                    | Time in ms between autoplay sliding                                         | `3000`          |
-| orientation    | `'horizontal' | 'vertical'` | Slider orientation                                                          | `'horizontal'`  |
-| playDirection  | `'normal' | 'reverse'`      | Autoplay direction                                                          | `'normal'`      |
-| slidesToScroll | `number`                    | Number of slides to scroll                                                  | `1`             |
-| slideSpeed     | `number`                    | Transition speed in ms                                                      | `400`           |
-| threshold      | `number`                    | Drag threshold for scrolling to next slide                                  | `0.2`           |
-| visibleSlides  | `number`                    | Number of slides visible                                                    | `1`             |
+| Setting        | Type          | Description                                                                 | Default            |
+| -------------- | ------------- | --------------------------------------------------------------------------- | ------------------ |
+| autoPlay       | `boolean`     | Autoplay through slides                                                     | `false`            |
+| autoSize       | `boolean`     | Set the height (or width) to the largest slide depending on the orientation | `true`             |
+| centerMode     | `boolean`     | Show active slide in the center                                             | `false`            |
+| draggable      | `boolean`     | Enable/disable drag to slide                                                | `true`             |
+| easing         | `string`      | CSS easing                                                                  | `'ease-in-out'`    |
+| edgeFriction   | `number`      | Resistance when swiping edges of non-infinite carousels                     | `0.3`              |
+| gap            | `number`      | Gap in pixels between each slide                                            | `0`                |
+| infinite       | `boolean`     | Intinite loop sliding                                                       | `false`            |
+| initialSlide   | `number`      | Initial slide to display                                                    | `0`                |
+| interval       | `number`      | Time in ms between autoplay sliding                                         | `3000`             |
+| orientation    | `'horizontal' | 'vertical'`                                                                 | Slider orientation | `'horizontal'` |
+| playDirection  | `'normal'     | 'reverse'`                                                                  | Autoplay direction | `'normal'` |
+| slidesToScroll | `number`      | Number of slides to scroll                                                  | `1`                |
+| slideSpeed     | `number`      | Transition speed in ms                                                      | `400`              |
+| threshold      | `number`      | Drag threshold for scrolling to next slide                                  | `0.2`              |
+| visibleSlides  | `number`      | Number of slides visible                                                    | `1`                |
 
 ## Responsive
 
