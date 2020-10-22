@@ -59,7 +59,6 @@ export default function useOptionsEffect({
   const { setDisableAnimation, setOptions } = useCarousel()
 
   useEffect(() => {
-    console.log('rerender')
     const options = Object.entries(responsive || {})
       .filter(([screen]) => matches[screen])
       .sort(([a], [b]) => parseInt(a, 10) - parseInt(b, 10))
@@ -89,5 +88,23 @@ export default function useOptionsEffect({
     setTimeout(() => {
       setDisableAnimation(false)
     })
-  }, [matches, responsiveToStr(responsive)])
+  }, [
+    matches,
+    responsiveToStr(responsive),
+    autoPlay,
+    autoSize,
+    centerMode,
+    draggable,
+    easing,
+    gap,
+    infinite,
+    initialSlide,
+    interval,
+    orientation,
+    playDirection,
+    slideSpeed,
+    slidesToScroll,
+    threshold,
+    visibleSlides
+  ])
 }

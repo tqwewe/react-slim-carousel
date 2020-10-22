@@ -38,24 +38,21 @@ export interface CarouselOptions {
 export const getOptions = (
   opts: Partial<CarouselOptions> = {}
 ): CarouselOptions =>
-  defaults(
-    {
-      autoPlay: false,
-      autoSize: true,
-      centerMode: false,
-      draggable: true,
-      easing: 'ease-in-out',
-      edgeFriction: 0.3,
-      gap: 0,
-      infinite: false,
-      initialSlide: 0,
-      interval: 3000,
-      orientation: 'horizontal',
-      playDirection: 'normal',
-      slidesToScroll: 1,
-      slideSpeed: 400,
-      threshold: 0.2,
-      visibleSlides: 1
-    },
-    opts
-  )
+  defaults(opts, {
+    autoPlay: false,
+    autoSize: true,
+    centerMode: false,
+    draggable: true,
+    easing: 'ease-in-out',
+    edgeFriction: 0.3,
+    gap: 0,
+    infinite: false,
+    initialSlide: 0,
+    interval: 3000,
+    orientation: 'horizontal',
+    playDirection: 'normal',
+    slidesToScroll: 1,
+    slideSpeed: 400,
+    threshold: 0.2,
+    visibleSlides: 1
+  })
