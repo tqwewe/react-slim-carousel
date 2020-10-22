@@ -22,24 +22,29 @@ export default function PreviousButton({
     }
   }
 
-  const dots = new Array(totalSlides / options.visibleSlides)
+  const dots = new Array(Math.ceil(totalSlides / options.slidesToScroll))
     .fill(null)
-    .map((_value, index) => (
-      <button
-        className={clsx(
-          'carousel-dot',
-          currentSlide === index * options.visibleSlides &&
-            'carousel-dot--active'
-        )}
-        key={index}
-        onClick={() => handleClick(index * options.visibleSlides)}
-      >
-        <Dot
-          active={currentSlide === index * options.visibleSlides}
-          index={index * options.visibleSlides}
-        />
-      </button>
-    ))
+    .map((_value, index) => {
+      let currentSlideNum = currentSlide
+      if (currentSlideNum < 0) {
+        currentSlideNum = totalSlides + currentSlideNum
+      } else if (currentSlideNum >= totalSlides) {
+        currentSlideNum = Math.abs(totalSlides - currentSlideNum)
+      }
+
+      const isActive =
+        index === Math.ceil(currentSlideNum / options.slidesToScroll)
+
+      return (
+        <button
+          className={clsx('carousel-dot', isActive && 'carousel-dot--active')}
+          key={index}
+          onClick={() => handleClick(index * options.slidesToScroll)}
+        >
+          <Dot active={isActive} index={index * options.slidesToScroll} />
+        </button>
+      )
+    })
 
   return (
     <div {...props} className={clsx('carousel-dots', className)}>
